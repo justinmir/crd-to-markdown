@@ -285,7 +285,9 @@ func fieldName(field *ast.Field) string {
 		if field.Names != nil {
 			return field.Names[0].Name
 		}
-		return field.Type.(*ast.Ident).Name
+		// If there is no parsable field name, return "-", assume it is an incorrectly inlined
+		// field.
+		return "-"
 	}
 	return jsonTag
 }
